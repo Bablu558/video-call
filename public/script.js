@@ -123,7 +123,7 @@ const endCall = () => {
 const switchCamera = () => {
     // Toggle between front and back camera
     currentCamera = (currentCamera === 'user') ? 'environment' : 'user';
-    endCall(); // End the current call before switching the camera
+    //endCall();  End the current call before switching the camera
     getUserMedia(); // Restart user media with the new camera
 };
 
