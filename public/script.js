@@ -1,0 +1,100 @@
+const localVideo = document.getElementById('localVideo');
+const remoteVideo = document.getElementById('remoteVideo');
+const socket = io();
+
+let localStream;
+let peerConnection;
+const config = {
+    iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' }
+    ]
+};
+
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    .then(stream => {
+        localVideo.srcObject = stream;
+        localStream = stream;
+
+        // Log the available tracks to check if audio is being captured
+        console.log('Local stream tracks:', localStream.getTracks());
+
+        socket.emit('join', 'room1');
+
+        socket.on('offer', (id, description) => {
+            console.log('Received offer from:', id);
+
+            peerConnection = new RTCPeerConnection(config);
+
+            // Add local tracks to the peer connection
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+            peerConnection.setRemoteDescription(description)
+                .then(() => peerConnection.createAnswer())
+                .then(sdp => peerConnection.setLocalDescription(sdp))
+                .then(() => {
+                    socket.emit('answer', id, peerConnection.localDescription);
+                });
+
+            peerConnection.ontrack = event => {
+                console.log('Received remote track:', event.streams[0]);
+
+                // Check if the remote stream contains audio tracks
+                const remoteStream = event.streams[0];
+                console.log('Remote stream tracks:', remoteStream.getTracks());
+
+                remoteVideo.srcObject = remoteStream;
+            };
+
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    socket.emit('candidate', id, event.candidate);
+                }
+            };
+        });
+
+        socket.on('answer', (description) => {
+            console.log('Received answer from peer');
+
+            peerConnection.setRemoteDescription(description);
+        });
+
+        socket.on('candidate', (id, candidate) => {
+            console.log('Received ICE candidate from peer');
+
+            peerConnection.addIceCandidate(new RTCIceCandidate(candidate));
+        });
+
+        socket.on('ready', (id) => {
+            console.log('Ready to start connection with:', id);
+
+            peerConnection = new RTCPeerConnection(config);
+
+            // Add local tracks to the peer connection
+            localStream.getTracks().forEach(track => peerConnection.addTrack(track, localStream));
+
+            peerConnection.onicecandidate = event => {
+                if (event.candidate) {
+                    socket.emit('candidate', id, event.candidate);
+                }
+            };
+
+            peerConnection.ontrack = event => {
+                console.log('Received remote track:', event.streams[0]);
+
+                // Check if the remote stream contains audio tracks
+                const remoteStream = event.streams[0];
+                console.log('Remote stream tracks:', remoteStream.getTracks());
+
+                remoteVideo.srcObject = remoteStream;
+            };
+
+            peerConnection.createOffer()
+                .then(sdp => peerConnection.setLocalDescription(sdp))
+                .then(() => {
+                    socket.emit('offer', id, peerConnection.localDescription);
+                });
+        });
+    })
+    .catch(error => {
+        console.error('Error accessing media devices:', error);
+    });
