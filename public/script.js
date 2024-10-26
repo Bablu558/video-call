@@ -116,7 +116,13 @@ const endCall = () => {
     remoteVideo.srcObject = null;
 
     console.log('Call ended.');
-    window.close();
+    alert("Your call has ended. Please close your browser.")
+    //  for mobile
+    const isMobile=/Mobi|Android/i.test(navigator.userAgent);
+    if (!isMobile){
+         window.close();
+    }
+   
 };
 
 // Function to switch the camera
