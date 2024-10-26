@@ -116,6 +116,7 @@ const endCall = () => {
     remoteVideo.srcObject = null;
 
     console.log('Call ended.');
+    window.close();
 };
 
 // Function to switch the camera

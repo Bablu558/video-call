@@ -42,3 +42,6 @@ video {
 .icon-button i {
     margin: 0; /* No margin for the icon */
 }
+#endCallButton{
+    background-color: red;
+}
