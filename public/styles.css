@@ -23,3 +23,22 @@ video {
     border: 2px solid #fff; /* Optional: Add a border for better visibility */
     border-radius: 10px; /
 }
+.icon-button {
+    margin: 10px;
+    padding: 15px; /* Padding for a larger click area */
+    font-size: 24px; /* Icon size */
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%; /* Make the button circular */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add a transition effect */
+}
+
+.icon-button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.icon-button i {
+    margin: 0; /* No margin for the icon */
+}
