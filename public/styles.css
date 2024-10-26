@@ -15,7 +15,11 @@ h1 {
 }
 
 video {
-    width: 45%;
+    width: 90%; /* Adjusted for better fit on mobile */
+    height: auto; /* Keep the aspect ratio */
+    max-width: 600px; /* Limit maximum width */
     margin: 10px;
     background: #000;
+    border: 2px solid #fff; /* Optional: Add a border for better visibility */
+    border-radius: 10px; /
 }

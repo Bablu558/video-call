@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": "v20.16.0"
+  },
   "name": "video-call",
   "version": "1.0.0",
   "main": "index.js",
