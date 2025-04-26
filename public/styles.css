@@ -1,65 +1,45 @@
 body {
-    /* font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    background: #282c34;
-    color: #ffffff; */
-
-    /* new */
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    /* background: #05cbbe; */
-    overflow: hidden; /* Prevent scrolling */
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-
-    /* new */
     background: linear-gradient(135deg, #1a73e8, #0f4c81);
     background-size: 400% 400%;
     animation: gradientAnimation 10s ease infinite;
     position: relative;
 }
+
 @keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-/* new */
+
 #videoContainer {
     position: relative;
-    width: 460px; /* Mobile screen width */
-    height: 740px; /* Mobile screen height */
+    width: 460px;
+    height: 740px;
     border: 2px solid #333;
     border-radius: 20px;
     overflow: hidden;
-    /* background: #000; */
     background: rgba(0, 0, 0, 0.8);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
-/* new  */
+
 #remoteVideo {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Maintain aspect ratio */
-    z-index: 1; /* Background video */
+    object-fit: cover;
+    z-index: 1;
 }
-/* new  */
+
 #localVideo {
     position: absolute;
     bottom: 20px;
@@ -68,12 +48,11 @@ body {
     height: 150px;
     border: 2px solid #fff;
     border-radius: 10px;
-    object-fit: cover; /* Maintain aspect ratio */
-    z-index: 2; /* Foreground video */
+    object-fit: cover;
+    z-index: 2;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-/* new */
 .controls {
     position: absolute;
     bottom: 20px;
@@ -81,36 +60,24 @@ body {
     transform: translateX(-50%);
     display: flex;
     gap: 10px;
-    z-index: 3; /* Ensure buttons stay on top */
+    z-index: 3;
 }
-
-/* new  */
 
 h1 {
     margin-bottom: 20px;
 }
 
 video {
-    width: 90%; /* Adjusted for better fit on mobile */
-    height: auto; /* Keep the aspect ratio */
-    max-width: 600px; /* Limit maximum width */
+    width: 90%;
+    height: auto;
+    max-width: 600px;
     margin: 10px;
     background: #000;
-    border: 2px solid #fff; /* Optional: Add a border for better visibility */
-    border-radius: 10px; /
+    border: 2px solid #fff;
+    border-radius: 10px;
 }
-.icon-button {
-    /* margin: 10px; */
-    /* padding: 15px; Padding for a larger click area */
-    /* font-size: 24px; Icon size */
-    /* background-color: #007bff; */
-    /* color: #ffffff; */
-    /* border: none; */
-    /* border-radius: 50%; Make the button circular */
-    /* cursor: pointer; */
-    /* transition: background-color 0.3s ease; Add a transition effect */
 
-    /* new */
+.icon-button {
     width: 50px;
     height: 50px;
     display: flex;
@@ -126,18 +93,17 @@ video {
 }
 
 .icon-button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
 }
 
 .icon-button i {
-    margin: 0; /* No margin for the icon */
+    margin: 0;
 }
-#endCallButton{
+
+#endCallButton {
     background-color: red;
 }
 
-
-/* new  */
 /* Particle Animation */
 .particle {
     position: absolute;
@@ -158,22 +124,20 @@ video {
     }
 }
 
-
-/* new   */
 /* Mobile Responsive Design */
 @media screen and (max-width: 768px) {
     body {
-        background: black; /* No gradient or animation */
-        animation: none; /* Stop gradient animation */
+        background: black;
+        animation: none;
     }
 
     #particleContainer {
-        display: none; /* Hide particles */
+        display: none;
     }
 
     #videoContainer {
-        width: 100vw; /* Full width for mobile */
-        height: 100vh; /* Full height for mobile */
+        width: 100vw;
+        height: 100vh;
         border: none;
         border-radius: 0;
         box-shadow: none;
@@ -192,6 +156,7 @@ video {
     }
 
     .controls {
-        display: visible; /* Hide controls on mobile */
+        display: flex; /* सही किया है */
+        bottom: 10px;
     }
 }
