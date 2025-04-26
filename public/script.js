@@ -139,3 +139,32 @@ document.getElementById('switchCameraButton').addEventListener('click', switchCa
 
 // Start user media on page load
 getUserMedia();
+
+//  new 
+
+ // Particle Effect Script
+ const particleContainer = document.getElementById("particleContainer");
+
+ function createParticle() {
+     const particle = document.createElement("div");
+     particle.classList.add("particle");
+
+     const size = Math.random() * 20 + 15; // Random size
+     particle.style.width = `${size}px`;
+     particle.style.height = `${size}px`;
+
+     particle.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+     particle.style.top = `${Math.random() * 100}vh`; // Start anywhere vertically
+
+     particle.style.animationDuration = `${Math.random() * 5 + 5}s`; // Random speed
+
+     particleContainer.appendChild(particle);
+
+     // Remove particle after animation ends
+     particle.addEventListener("animationend", () => {
+         particle.remove();
+     });
+ }
+
+ // Generate particles continuously
+ setInterval(createParticle, 300);
